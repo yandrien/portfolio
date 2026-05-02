@@ -36,11 +36,11 @@
             font-family: 'Inter', sans-serif;
             background-color: #f0fdf4; /* Warna latar belakang hijau sangat muda */
 			
-			/* Mengatur zoom menjadi 75% */
+			/* Mengatur zoom menjadi 75%
         zoom: 0.75;
         /* Untuk Firefox (Firefox tidak mendukung 'zoom', maka gunakan scale) */
         -moz-transform: scale(0.75);
-        -moz-transform-origin: 0 0;
+        -moz-transform-origin: 0 0; */
         
         }
         
