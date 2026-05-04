@@ -366,13 +366,13 @@
     
     @if(isset($unique_visitors))
     <div id="visitor-stats-kambaniru" class="z-50">
-        <div class="flex flex-row items-center gap-2 text-xs">
-            @auth
-    			{{-- Hanya Admin yang bisa klik link monitoring --}}
-    			@if(auth()->user()->is_admin)
-    				<a href="{{ url('/monitoring-pengunjung') }}" class="block hover:bg-white/5 transition-colors duration-200 rounded-lg p-1" >
-    			@endif
-	    	@endauth
+        @php
+			$isAdmin = auth()->check() && auth()->user()->is_admin;
+		@endphp
+
+    <!-- Jika Admin, bungkus dengan <a>, jika tidak gunakan <div> biasa -->
+    <{!! $isAdmin ? 'a href="'.url('/monitoring-pengunjung').'"' : 'div' !!} 
+        class="flex flex-row items-center gap-2 text-xs {{ $isAdmin ? 'hover:bg-white/5 transition-colors duration-200 rounded-lg p-1' : '' }}">
             <div class="flex items-center gap-1.5">
                 <span>👤</span>
                 <span class="font-bold">{{ number_format($unique_visitors, 0, ',', '.') }}</span>
@@ -395,12 +395,7 @@
                     @endforelse
                 </span>
             </div>
-        </div>
-        @auth
-			@if(auth()->user()->is_admin)
-				</a>
-			@endif
-		@endauth
+        </{!! $isAdmin ? 'a' : 'div' !!}>
     </div>
     @endif
 
